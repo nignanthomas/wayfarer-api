@@ -4,8 +4,10 @@
   "description": "WayFarer is a public bus transportation booking service. (API)",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node ./api/index.js",
-    "test": "mocha --timeout 10000"
+    "dev": "nodemon --exec babel-node ./api/server.js",
+    "test": "mocha --timeout 10000",
+    "build": "babel api -d build",
+    "start": "npm run build && node build/server.js"
   },
   "repository": {
     "type": "git",
