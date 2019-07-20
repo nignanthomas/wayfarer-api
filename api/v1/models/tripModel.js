@@ -35,7 +35,7 @@ class Trip {
   *
   * @param {object} trip object
   */
-  create(data) {
+  createTrip(data) {
     const newTrip = {
       id: uuid.v4(),
       seating_capacity: data.seating_capacity,
@@ -46,20 +46,20 @@ class Trip {
       fare: data.fare,
       status: data.status,
     };
-    this.users.push(newTrip);
+    this.trips.push(newTrip);
     return newTrip;
   }
 
   /**
   * @param {uuid} id
-  * @param {object} trip object
+  * @returns {object} trip object
   */
   getOneTrip(id) {
     return this.trips.find(trip => trip.id === id);
   }
 
   /**
-  * @param {object} return all trips
+  * @returns {object} return all trips
   */
   getAllTrips() {
     return this.trips;
@@ -92,9 +92,9 @@ class Trip {
   */
   deleteTrip(id) {
     const trip = this.getOneTrip(id);
-    // [user, ...otherUsers] = this.users;
-    // this.users = otherUsers;
-    const index = this.users.indexOf(trip);
+    // [trip, ...otherTrips] = this.trips;
+    // this.trips = otherTrips;
+    const index = this.trips.indexOf(trip);
     this.trips.splice(index, 1);
     return {};
   }

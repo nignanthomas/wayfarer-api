@@ -30,7 +30,7 @@ class User {
   *
   * @param {object} user object
   */
-  create(data) {
+  createUser(data) {
     const newUser = {
       id: uuid.v4(),
       email: data.email,
@@ -45,14 +45,14 @@ class User {
 
   /**
   * @param {uuid} id
-  * @param {object} user object
+  * @returns {object} user object
   */
   getOneUser(id) {
     return this.users.find(user => user.id === id);
   }
 
   /**
-  * @param {object} return all users
+  * @returns {object} return all users
   */
   getAllUsers() {
     return this.users;
