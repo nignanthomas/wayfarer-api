@@ -80,7 +80,16 @@ describe('Trips Tests', () => {
     chai
       .request(app)
       .patch(`/api/v1/trips/${tripId}`)
-      .send(trip)
+      .send({
+        id: uuid.v4(),
+        seating_capacity: 45,
+        bus_license_number: 'KC8 219',
+        origin: 'Ouagadougou',
+        destination: 'Kigali',
+        trip_date: moment.now(),
+        fare: 7500,
+        status: 0,
+      })
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
