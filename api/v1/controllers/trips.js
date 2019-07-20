@@ -18,5 +18,7 @@ const Trip = {
       return res.status(500).json({ status: 'error', error: 'Oops! Cannot retrieve trips. :(' });
     }
   },
+
+
 };
 export default Trip;
