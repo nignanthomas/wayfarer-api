@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --exec babel-node ./api/server.js",
     "test": "mocha --require @babel/register test/*.test.js --exit --timeout 10000",
-    "build": "babel api -d build",
+    "build": "rm -rf ./build && babel api -d build",
     "start": "npm run build && node build/server.js"
   },
   "repository": {
