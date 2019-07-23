@@ -8,7 +8,7 @@ const Booking = {
   */
   createBooking(req, res) {
     const { body } = req;
-    if (!body.user_id || !body.trip_id) {
+    if (!body.user_id || !body.trip_id || !body.seat_number) {
       return res.status(400).json({ status: 'error', error: 'Bad Request! All booking fields are required!' });
     }
     const booking = BookingModel.book(body);
@@ -51,7 +51,7 @@ const Booking = {
     const bookingId = parseInt(req.params.bookingId, 10);
     const oneBooking = BookingModel.getOneBooking(bookingId);
     if (oneBooking) {
-      const updatedBooking = BookingModel.updateBooking(bookingId, req.body);
+      const updatedBooking = BookingModel.updateBooking(bookingId, req.body.seat_number);
       return res.status(200).json({ status: 'success', data: { message: 'Booking Updated Successfully!', data: updatedBooking } });
     }
     return res.status(404).json({ status: 'error', error: `Cannot find booking of id: ${bookingId}` });
