@@ -1,26 +1,4 @@
 import moment from 'moment';
-import UserModel from './userModel';
-import TripModel from './tripModel';
-
-
-/**
-*
-* @param {object} data
-* @returns {object} formatted booking object
-*/
-const formatBooking = (data) => {
-  const formatted = {
-    id: data.id,
-    bus_license_number: TripModel.getOneTrip(data.trip_id).bus_license_number,
-    trip_date: UserModel.getOneUser(data.user_id).trip_date,
-    first_name: UserModel.getOneUser(data.user_id).first_name,
-    last_name: UserModel.getOneUser(data.user_id).last_name,
-    user_email: UserModel.getOneUser(data.user_id).email,
-    seat_number: data.seat_number,
-  };
-  return formatted;
-};
-
 
 class Booking {
   /**
@@ -33,19 +11,16 @@ class Booking {
         id: 1,
         trip_id: 2,
         user_id: 1,
-        seat_number: 12,
         create_on: moment().format('dddd, MMMM Do YYYY, h:mm:ss a'),
       },
       {
         id: 2,
         trip_id: 1,
         user_id: 2,
-        seat_number: 9,
         create_on: moment().format('dddd, MMMM Do YYYY, h:mm:ss a'),
       },
     ];
   }
-
 
   /**
   *
@@ -56,7 +31,6 @@ class Booking {
       id: this.bookings.length + 1,
       trip_id: data.trip_id,
       user_id: data.user_id,
-      seat_number: data.seat_number,
       create_on: moment().format('dddd, MMMM Do YYYY, h:mm:ss a'),
     };
     this.bookings.push(newBooking);
@@ -68,8 +42,7 @@ class Booking {
   * @returns {object} data
   */
   getOneBooking(id) {
-    const oneBooking = this.bookings.find(booking => booking.id === id);
-    return formatBooking(oneBooking);
+    return this.bookings.find(booking => booking.id === id);
   }
 
   /**
@@ -77,12 +50,7 @@ class Booking {
   * @returns {object} return all bookings
   */
   getAllBookings() {
-    const formattedBookings = [];
-    this.bookings.forEach((booking) => {
-      const formattedBooking = formatBooking(booking);
-      formattedBookings.push(formattedBooking);
-    });
-    return formattedBookings;
+    return this.bookings;
   }
 
   /**
@@ -94,7 +62,9 @@ class Booking {
     const index = this.bookings.indexOf(booking);
     this.bookings[index] = {
       id: booking.id,
-      seat_number: data.seat_number || booking.seat_number,
+      trip_id: data.trip_id || booking.trip_id,
+      user_id: data.user_id || booking.user_id,
+      create_on: data.create_on || booking.create_on,
     };
     return this.bookings[index];
   }
