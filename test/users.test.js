@@ -43,7 +43,7 @@ describe('Users Tests', () => {
       });
   });
 
-  it('GET /api/v1/users/:id Should not get a specific user (Use 11 that does not exist)', (done) => {
+  it('GET /api/v1/users/:id Should not get a specific user (User 11 that does not exist)', (done) => {
     chai
       .request(app)
       .get('/api/v1/users/11')
@@ -55,7 +55,7 @@ describe('Users Tests', () => {
       });
   });
 
-  it('GET /api/v1/users/:id Should not get a specific user (Use \'a\' that does not exist)', (done) => {
+  it('GET /api/v1/users/:id Should not get a specific user (User \'a\' that does not exist)', (done) => {
     chai
       .request(app)
       .get('/api/v1/users/a')
